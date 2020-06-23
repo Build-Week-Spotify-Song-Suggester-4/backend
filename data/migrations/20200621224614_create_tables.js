@@ -37,7 +37,7 @@ exports.up = function(knex) {
                 .onDelete('CASCADE')
                 .onUpdate('CASCADE');
             tbl
-                .string('song_id')
+                .integer('song_id')
                 .notNullable()
                 .references('id')
                 .inTable('tracks')
