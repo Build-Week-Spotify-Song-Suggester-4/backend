@@ -28,4 +28,21 @@ router.get('/:id', (req, res) => {
         })
 });
 
+//'/api/users/:id'
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    Users.deleteUser(id) 
+        .then(user => {
+            if(user) {
+                res.json(user);
+            } else {
+                res.status(404).json({ message: 'Unable to find user' })
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Unable to retreive user', error: err })
+        })
+})
+
 module.exports = router;
