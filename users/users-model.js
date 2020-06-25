@@ -20,7 +20,7 @@ function findById(id) {
 };
 
 function addUser(user) {
-    return db('users').insert(user)
+    return db('users').returning("id").insert(user)
         .then(ids => {
             const [id] = ids;
             return findById(id)
