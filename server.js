@@ -5,6 +5,7 @@ const cors = require('cors');
 const authRouter = require('./auth/auth-router');
 const userRouter = require('./users/users-router');
 const musicRouter = require('./songs/songs-router');
+const authenticator = require('./auth/authenticator.js')
 
 const server = express();
 
@@ -14,9 +15,9 @@ server.use(helmet());
 server.use(cors());
 
 //server configuration
-server.use('/api/auth', authRouter);
-server.use('/api/users', userRouter);
-server.use('/api/music', musicRouter);
+server.use('/auth', authRouter);
+server.use('/users', userRouter);
+server.use('/music', musicRouter);
 
 
 server.get('/', (req, res) => {

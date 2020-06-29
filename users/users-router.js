@@ -45,4 +45,16 @@ router.delete('/:id', (req, res) => {
         })
 })
 
+router.put('/:id', (req, res) => {
+    const {id} = req.params
+    const changes = req.body
+    Users.edit(id, changes)
+    .then(user => {
+        res.status(200).json(user)
+    })
+    .catch(err => {
+        res.status(500).json({error: err.message})
+    })
+})
+
 module.exports = router;

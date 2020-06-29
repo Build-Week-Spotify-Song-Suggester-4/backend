@@ -34,7 +34,7 @@ router.get('/:id/faves', (req, res) => {
 // get audio features visualization for single track
 router.post('/singletrack/data', (req, res) => {
     const track_id = req.body.track_id;
-    axios.get(`***Heroku URL from DS Students***/${track_id}`)
+    axios.get(`https://rowais-spotify.herokuapp.com/${track_id}`)
         .then(response => {
             return res.json(response.data)
         })
@@ -47,7 +47,7 @@ router.post('/singletrack/data', (req, res) => {
 // get req from ds with one song 
 router.post('/singletrack', (req, res) => {
     const track_id = req.body.track_id;
-    axios.get(`***Heroku URL from DS Students***/${track_id}`)
+    axios.get(`https://rowais-spotify.herokuapp.com/${track_id}`)
         .then(response => {
             return res.json(response.data)
         })
@@ -66,7 +66,7 @@ router.post('/:id/faves/playlist', (req, res) => {
         })
         .catch(err => console.log(err));
 
-     axios.post('***Heroku URL from DS Students***/favorites')
+     axios.post('https://rowais-spotify.herokuapp.com/favorites')
         
 
 });

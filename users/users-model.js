@@ -1,33 +1,41 @@
-const db = require('../data/db-config');
+const db = require('../data/db-config.js')
 
 module.exports = {
-    find,
-    findBy,
-    findById,
     addUser,
-    deleteUser
-};
+    getUserBy,
+    edit,
+    deleteUser,
+    getUsers
+}
 
-function find() {
-    return db('users').select('id', 'username', 'password');
-};
+function getUsers(){
+    return db('users')
+}
 
-function findBy(filter) {
-    return db('users').where(filter).first();
-};
+function addUser(user){
+    return db('users')
+    .returning('id')
+    .insert(user)
+    .then(([id]) => {
+        return getUserBy({id})
+    })
+}
 
-function findById(id) {
-    return db('users').where({ id }).first().select('id', 'username', 'password');
-};
+function getUserBy(filter){
+    return db('users')
+    .first()
+    .where(filter)
+}
 
-function addUser(user) {
-    return db('users').returning("id").insert(user)
-        .then(ids => {
-            const [id] = ids;
-            return findById(id)
-        })
-};
+function edit(id, changes) {
+    console.log(id)
+    return db('users').where({id}).update(changes)
+    .then(() => {
+        console.log(id)
+        return getUserBy({id})
+    })
+}
 
-function deleteUser(id) {
-    return db('users').where({ id }).del();
+function deleteUser(id){
+    return db('users').where({id}).del();
 }
